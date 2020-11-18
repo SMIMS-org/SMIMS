@@ -132,4 +132,8 @@ Contract.prototype.addContract = function(){
     })
 }
 
+Contract.getAllContract = function(){
+    
+}
+
 module.exports = Contract
