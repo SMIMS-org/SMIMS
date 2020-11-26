@@ -6,18 +6,23 @@
           
         </center>
       <center class="profile"> <strong><%=user.username %></strong></center>
-        <li class="item">
-            <a href="tenantRegistration" class="menu-btn">
-                <i class="fas fa-users"></i><span>Register Tenant</span>
+        <li class="item"  id="Tenante Registration">
+            <a href="#Tenante Registration" class="menu-btn">
+                <i class="fas fa-users"></i><span>Register Tenant<i class="fas fa-chevron-down drop-down"></i></span>
             </a> 
-        </li>
-        <li class="item" id="room">
-            <a href="/room" class="menu-btn">
-                <i class="fas fa-door-closed"></i><span>Room<i class="fas fa-chevron-down drop-down"></i></span>
+        
+        <div class="sub-menu">
+            <a href="view Tenants.html"><i class="fas fa-users"></i><span>View Tenants</span></a>
+            <a href="tenantRegistration"><i class="fas fa-users"></i><span>New Tenants</span></a>
+        </div>
+    </li>
+        <li class="item" id="Rooms">
+            <a href="#Rooms" class="menu-btn">
+                <i class="fas fa-door-closed"></i><span>Rooms<i class="fas fa-chevron-down drop-down"></i></span>
             </a>
             <div class="sub-menu">
-                <a href="#"><i class="fas fa-door-closed"></i><span>View contracts</span></a>
-                <a href="/room"><i class="fas fa-door-closed"></i><span>New contract</span></a>
+                <a href="/allrooms"><i class="fas fa-door-closed"></i><span>View Rooms</span></a>
+                <a href="/room"><i class="fas fa-door-closed"></i><span>New Rooms</span></a>
             </div>
         </li>
 
