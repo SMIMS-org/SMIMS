@@ -11,48 +11,51 @@
         <h1>All Contracts</h1>
 
     </div>
+    <%- include('includes/employee/flash') %>
+
+    <% regErrors.forEach(function(message){%>
+        <div class="alert alert-danger small"><%= message%></div>
+    <%}) %>
+
 <table class="table  table-bordered table-striped table-inverse table-responsive">
     <thead class="thead-inverse">
         <tr>
             <th>Id</th>
             <th>Contract No</th>
             <th>FullName</th>
-            <th>Tin No.</th>
             <th>Start Date</th>
             <th>End Date</th>
-            <th>Room Size</th>
             <th>RoomId</th>
-            <th>Room Type</th>
             <th>Price</th>
             <th>Date</th>
             <th>Advance</th>
         </tr>
         </thead>
         <tbody>
-            <% ContractDetail.forEach(ContractDetail => {%>
-                <tr>
-                <td><%=ContractDetail._id %></td>
-                <td><%=ContractDetail.contractNo %></td>
-                <td><%=ContractDetail.fullname %></td>
-                <td><%=ContractDetail.tinnumber%></td>
-                <td><%=ContractDetail.startDate %></td>
-                <td><%=ContractDetail.endDate %></td>
-                <td><%=ContractDetail.roomsize%></td>
-                <td><%=ContractDetail.roomno%></td>
-                <td><%=ContractDetail.roomtype%></td>
-                <td><%=ContractDetail.price %></td>
-                <td><%=ContractDetail.date %></td>
-                <td><%=ContractDetail.advance %></td>
-                <td class="d-flex">
-                    <a href="/admin/posts/edit/{{_id}}" class="btn btn-sm btn-warning mr-2">Edit Post</a>
+      
                 
-                    <form action="/admin/posts/delete/{{id}}?newMethod=DELETE" method="post">
-                        <button class="btn btn-sm btn-danger" type="submit">Delete Post</button>
+          
+            <%contract.forEach(contract => {%>
+                <tr>
+                <td><%=contract._id %></td>
+                <td><%=contract.contractNo %></td>
+                <td><%=contract.fullnameId.fullname %></td>
+                <td><%=contract.startDate %></td>
+                <td><%=contract.endDate %></td>
+                <td><%= contract.roomnoId.roomno  %></td>
+                <td><%=contract.price %></td>
+                <td><%=contract.date %></td>
+                <td><%=contract.advance %></td>
+                <td class="d-flex">
+                    <a href="/contract/<%= contract._id%>" class="btn btn-sm btn-warning mr-2">Edit</a>
+                
+                    <form action="/allcontracts/<%= contract._id%>" method="POST">
+                        <button class="btn btn-sm btn-danger" type="submit">Delete</button>
                     </form>
                     </td>
             </tr>
 
-            
+              
        <% }); %> 
           
         </tbody>

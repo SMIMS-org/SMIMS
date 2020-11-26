@@ -74,20 +74,18 @@ Room.prototype.addRoom = function(){
     
     })
 }
-// Room.findSingleById = function(id) {
-//     return new Promise(async function(resolve, reject) {
-//       if (typeof(id) != "string" || !ObjectID.isValid(id)) {
-//         reject()
-//         return
-//       }
-//       let rooms = await roomCollection.findOne({_id: new ObjectID(id)})
-//       if (rooms) {
-//         resolve(rooms)
-//       } else {
-//         reject()
-//       }
-//     })
-//   }
-  
+Room.findRoom = function(req,res){
+    return new Promise(async (resolve, reject)=> {
+       
+          let  room= await roomCollection.find().toArray()
+          if(room){
+              resolve(room)
+          }else{
+              reject()
+          }
+            }
+        )
+    }   
+            
 
 module.exports = Room
