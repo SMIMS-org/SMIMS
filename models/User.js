@@ -89,26 +89,23 @@ User.prototype.validate =  function(){
     })
 }
 User.prototype.login = function () {
-    // if (this.data.username == "") {
-    //     this.errors.push("You must Provide a User Name")
-    // }
-    // if (this.data.password == "") {
-    //     this.errors.push("You must Provide a valid Password")
-    // }
+
     return new Promise((resolve, reject) => {
         this.cleanUp();
         usersCollection.findOne({
             username: this.data.username,
             role: this.data.role
+           
+
         }).then((attemptedUser) => {
-           // if(attemptedUser && attemptedUser.password== this.data.password) {
-            
+            // console.log(role)
             if (attemptedUser && this.data.role == attemptedUser.role  && bcrypt.compareSync(this.data.password, attemptedUser.password) ) {
                 resolve("Congrat!!!")
                            
-                //res.route
+                console.log(role)
 
             } else {
+                console.log("reject")
                 reject("Invalide Username and password")
 
             }

@@ -8,14 +8,11 @@
 
 
     <h3>Edit Contract</h3>
-
+        <%- include('includes/employee/flash') %>
+        <a href="#"></a>
     
-    <form action="/contract" method="POST"  class="main-form needs-validation" novalidate>
-        <% regErrors.forEach(function(message){%>
-            <div class="alert alert-danger small"><%= message%></div>
-        <%}) %>
+    <form action="/contract/<%=contract._id %> " method="POST"  class="main-form needs-validation" novalidate>
        
-
         
         <div class="row">
            
@@ -26,10 +23,13 @@
 
                 <div class="form-group">
                     <label for="Full Name">Full Name</label>
-                    <select id="tenantName" name="tenantName" class="form-control">
-                       
-                        <option value="<%= contract.fullnameId.fullnameid %>"><%=contract.fullnameId.fullname  %> </option>
-                        
+                    <select id="tenantName" name="tenantName" class="form-control"> 
+                        <!-- <option value="<%= contract.fullnameId._id%>"><%= contract.fullnameId.fullname %> </option> -->
+                        <option value="<%= contract.fullnameId._id %>"><%= contract.fullnameId.fullname  %> </option>
+                        <% tenant.forEach(function(tenants) {%>
+                            <option value="<%= tenants._id%>"><%= tenants.fullname%></option>
+                                
+                          <%})%>
                     </select>
                 </div>
                 
@@ -47,7 +47,11 @@
             <div class="form-group">
                 <label for="Room Number">Room Number</label>
                  <select name="roomno" id="roomno"  class="form-control" >
-                    <option value="<%= contract.roomnoId.id %>"><%= contract.roomnoId.roomno %> </option>
+                    <option value="<%= contract.roomnoId._id %>"><%= contract.roomnoId.roomno  %> </option>
+                    <% room.forEach(function(rooms) {%>
+                        <option value="<%= rooms._id %>"><%= rooms.roomno %></option>
+                            
+                      <%})%>
                     
                  </select>
             </div>

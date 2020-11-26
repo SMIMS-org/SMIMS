@@ -2,10 +2,12 @@ const bcrypt = require('bcryptjs')
 const tenantCollection = require('../db').db().collection("tenant")
 const userCollection  =require('../db').db().collection("users")
 const validator = require('validator')
+const ObjectId = require('mongodb').ObjectID
 
 
-let Tenant = function (data) {
+let Tenant = function (data, userid) {
     this.data = data
+    this.userid = userid
     this.errors = []
 }
 
@@ -43,7 +45,8 @@ Tenant.prototype.cleanUp = function () {
         address: this.data.address,
         username: this.data.username.trim().toLowerCase(),
         password: this.data.password,
-        role:  "tenant"
+        role:  "tenant",
+        createdBy:ObjectId(this.userid)
 
     }
 
@@ -131,22 +134,19 @@ Tenant.prototype.registerTenant = function(){
     
     })
 }
-Tenant.prototype.getTenant = function(req,res){
+Tenant.findTenant = function(req,res){
     return new Promise(async (resolve, reject)=> {
-        if (!this.errors.length) {
-            tenantCollection.find({}).toArray(function(err, tenant){
-               // console.log("tenants", tenant)
-               
-            })
-           // return tenant
+       
+          let  tenant= await tenantCollection.find().toArray()
+          if(tenant){
+              resolve(tenant)
+          }else{
+              reject()
+          }
+            }
+        )
+    }   
             
-            
-            resolve()
-    }else{
-
-        reject(this.errors)
-    }
-})
-}
+          
 
 module.exports = Tenant

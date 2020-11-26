@@ -36,8 +36,8 @@
                 <td><%=receipt._id %></td>
                 <td><%=receipt.receiptNo %></td>
                 <td><%= receipt.date %></td>
-                <td><%=receipt.fullnameId %></td>
-                <td><%=receipt.roomnoId%></td>
+                <td><%=receipt.fullnameId.fullname %></td>
+                <td><%=receipt.roomnoId.roomno %></td>
                 <td><%=receipt.startDate %></td>
                 <td><%=receipt.endDate %></td>
                 <td><%=receipt.price %></td>
@@ -48,7 +48,7 @@
                 <td class="d-flex">
                     <a href="/receipt/<%= receipt._id%>" class="btn btn-sm btn-warning mr-2">Edit Post</a>
                 
-                    <form action="/receipt/<%= receipt._id%>?newMethod=DELETE" method="POST">
+                    <form action="/allreceipts/<%= receipt._id%>?newMethod=DELETE" method="POST">
                         <button class="btn btn-sm btn-danger" type="submit">Delete Post</button>
                     </form>
                     </td>

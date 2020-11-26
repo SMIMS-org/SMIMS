@@ -19,6 +19,15 @@ let sessionOptions = session({
 app.use(sessionOptions)
 app.use(flash())
 
+app.use(function(req, res, next){
+    //make all error and success flash messages available form all ejs
+    res.locals.errors = req.flash("errors")
+    res.locals.success = req.flash("success")
+    res.locals.user= req.session.user
+    next()
+
+})
+
 const router = require('./router')
 
 app.use(express.urlencoded({

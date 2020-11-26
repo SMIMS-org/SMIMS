@@ -11,7 +11,7 @@
 
     
     <form action="/contract" method="POST"  class="main-form needs-validation" novalidate>
-
+        <%- include('includes/employee/flash') %>
         <% regErrors.forEach(function(message){%>
             <div class="alert alert-danger small"><%= message%></div>
         <%}) %>
