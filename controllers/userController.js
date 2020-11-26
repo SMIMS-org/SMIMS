@@ -94,12 +94,12 @@ exports.home = function (req, res) {
     } 
     else if (req.session.user && req.session.user.role === "tenant") {
         //res.render('admin')
-        res.render('tenant-dashboard')
+        res.render('tenant/tenant-dashboard')
 
     }
     else if (req.session.user && req.session.user.role === "manager") {
         //res.render('admin')
-        res.render('manager-dashboard')
+        res.render('manager/manager-dashboard')
 
     }
     
