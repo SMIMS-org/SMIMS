@@ -11,7 +11,7 @@ exports.tenatRegister = function (req, res) {
 }
 exports.postTenantRegister = function (req, res) {
     // console.log(req.body)
-    let tenant = new Tenant(req.body)
+    let tenant = new Tenant(req.body,req.session.user._id)
     tenant.registerTenant().then(()=>{
         // req.session.user = {username: user.data.username}
         // req.session.save(function () {

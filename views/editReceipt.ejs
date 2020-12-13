@@ -1,0 +1,162 @@
+<%- include('includes/employee/header.ejs')  %>
+<!--header menu end-->
+<!--sidebar start-->
+<%- include('includes/employee/sidebar.ejs')  %>
+
+
+<div class="main-container">
+    <%- include('includes/employee/flash') %>
+              
+    <form action="/allreceipt/<%= receipt._id%>" method="POST" class="main-form needs-validation" novalidate>
+
+        <% regErrors.forEach(function(message){%>
+            <div class="alert alert-danger small"><%= message%></div>
+        <%}) %>
+
+        <div class="form-group">
+            <label for="Receipt No">Receipt No</label>
+            <input type="text" value="<%= receipt.receiptNo  %> " name="receiptNo" id="receiptNo" class="form-control">
+   
+        </div>
+
+    <div class="form-group">
+        <label for="Date">Date</label>
+        <input type="Date" value="<%=receipt.date  %>" name="date" id="date"  class="form-control" required>
+      
+    </div>
+
+    <div class="form-group">
+        <label for="Full Name">Full Name</label>
+        <select id="tenantName" name="tenantName" class="form-control">
+            <option value="<%= receipt.fullnameId._id %>"><%= receipt.fullnameId.fullname  %> </option>
+                       
+                        <% tenant.forEach(function(tenants) {%>
+                        <option value="<%= tenants._id %>"><%= tenants.fullname %></option>
+                            
+                      <%})%>
+        </select>
+    </div>
+ <div class="col">
+    
+
+<div class="form-group">
+    <label for="RStart Date">startDate</label>
+    <input type="Date" value="<%=receipt.startDate  %>" name="startDate" id="startDate" onchange="cal()" class="form-control" required>
+ 
+</div>
+<div class="form-group">
+    <label for="End Date">End Date</label>
+    <input type="Date" value="<%=receipt.endDate  %>" name="endDate" id="endDate" onchange="cal()" class="form-control" required>
+</div>
+
+<div class="form-group">
+    <label for="Months">Months</label>
+    <input type="text" name="months" id="months"  class="form-control" required>
+</div>
+
+<div class="form-group">
+    <label for="Room Number">Room Number</label>
+     <select id="roomno" name="roomno" id="roomno" class="form-control" >
+        <option value="<%= receipt.roomnoId.id %>"><%= receipt.roomnoId.roomno %> </option> 
+                    <% room.forEach(function(rooms) {%>
+                        <option value="<%= rooms._id %>"><%= rooms.roomno %></option>
+                            
+                      <%})%>
+     </select>
+</div>
+
+<div class="form-group">
+    <label for="Price">Price</label>
+    <input type="Number" value="<%=receipt.price %>" name="price" id="price" onclick="calTotal()"  class="form-control">
+</div>
+
+<div class="form-group">
+    <label for="Total">Total</label>
+     <input type="Number" value="<%=receipt.total  %>" name="total" id="total" onclick="calTotal()" class="form-control">
+</div>
+
+<div class="form-group">
+ <label for="VAT">VAT</label>
+  <input type="Number"  value="<%=receipt.vat  %>" name="vat" id="vat" onclick="calTotal()" class="form-control">
+</div>
+<div class="form-group">
+ <label for="Total Amount">Total Amount</label>
+  <input type="Number" value="<%=receipt.totalAmount  %>" name="totalAmount" id="totalAmount" class="form-control">
+</div>
+
+<button type="submit" class="btn btn-primary">Submit</button>
+</div>
+</form>
+
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+crossorigin="anonymous"></script>
+<!-- 
+<script>
+var form = document.querySelector('.needs-validation');
+
+form.addEventListener('submit', function(event) {
+ if (form.checkValidity() === false) {
+     event.preventDefault();
+     event.stopPropagation();
+ }
+ form.classList.add('was-validated');
+})
+</script> -->
+
+
+
+ </div>
+ <!--main container end-->
+</div>
+<!--wrapper end-->
+
+<script type="text/javascript">
+$(document).ready(function(){
+ $(".sidebar-btn").click(function(){
+     $(".wrapper").toggleClass("collapse");
+ });
+});
+</script>
+<script type="text/javascript">
+    
+function Noofmonths() {
+    var Nomonths;
+    let date1 = new Date(document.getElementById("startDate").value)
+    let date2 =new Date(document.getElementById("endDate").value)
+    Nomonths= (date2.getFullYear() - date1.getFullYear()) * 12;
+    Nomonths-= date1.getMonth() + 1;
+    Nomonths+= date2.getMonth() +1; // we should add + 1 to get correct month number
+    return Nomonths 
+}
+function cal(){
+    if(document.getElementById("endDate")){
+        document.getElementById("months").value=Noofmonths()
+    }
+}
+
+</script>
+<script type="text/javascript">
+function calTotal(){
+   // let roomsize = document.getElementById("roomsize").value
+    let price = document.getElementById("price").value
+    let month = document.getElementById("months").value
+    result = parseFloat( price * month)
+    let vatre = parseFloat(result* 0.15)
+    let totalamount = parseFloat(vatre + result)
+    if(!isNaN(result)){
+        document.getElementById("total").value = result
+        document.getElementById("vat").value = vatre
+        document.getElementById("totalAmount").value = totalamount
+    }
+
+}
+
+</script>
+
+</body>
+</html>
+                

@@ -1,0 +1,21 @@
+<%- include('../includes/tenant/header') %>
+<%- include('../includes/tenant/sidebar') %>
+<div class="main-container">
+              
+    <h1>Welcome To <%=user.username %>'s Page</h1>
+</div>
+<!--main container end-->
+</div>
+<!--wrapper end-->
+
+<script type="text/javascript">
+$(document).ready(function(){
+$(".sidebar-btn").click(function(){
+    $(".wrapper").toggleClass("collapse");
+});
+});
+</script>
+
+</body>
+</html>
+               
