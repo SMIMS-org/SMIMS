@@ -131,6 +131,7 @@ Contract.prototype.addContract = function(){
     })
 }
 
+
 Contract.prototype.update = function(){
     return new Promise(async (resolve, reject) => {
         try{
@@ -283,6 +284,7 @@ Contract.delete = function(contractIdToDelete){
         }
     })
 }
+
 
 
 module.exports = Contract
